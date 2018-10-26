@@ -101,11 +101,11 @@ def run_support_vector_machine(X_train, y_train, X_test, y_test):
 
 def run_neural_network(X_train, y_train, X_test, y_test):
     """Trains and tests a neural network"""
-    y_train = np_utils.to_categorical(y_train, 10)
+    y_train = np_utils.to_categorical(y_train, 10)  # converting labels array to categorically instead of binary
     y_test = np_utils.to_categorical(y_test, 10)
     model = Sequential()
     model.add(Dense(512, input_shape=(784,), activation='relu'))
-    model.add(Dropout(0.2))
+    model.add(Dropout(0.2))  # adding dropout to avoid overfitting
     model.add(Dense(512, activation='relu'))
     model.add(Dropout(0.2))
     model.add(Dense(10, activation='softmax'))
@@ -126,10 +126,10 @@ def main():
     images_train, images_test, labels_train, labels_test = train_test_split(data_images, data_labels, test_size=0.25,
                                                                             random_state=42)
     show_image(images_test[0])
-    images_train /= 255
-    images_test /= 255
+    images_train /= 255  # normalizing values
+    images_test /= 255  # normalizing values
     run_decision_tree_classifier(images_train, labels_train, images_test, labels_test)
-    #run_random_forest_classifier(images_train, labels_train, images_test, labels_test)
+    run_random_forest_classifier(images_train, labels_train, images_test, labels_test)
     #run_k_neighbors_classifier(images_train, labels_train, images_test, labels_test)
     #run_support_vector_machine(images_train, labels_train, images_test, labels_test)
     run_neural_network(images_train, labels_train, images_test, labels_test)
